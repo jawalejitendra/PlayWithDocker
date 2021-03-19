@@ -15,6 +15,7 @@ case $1 in
     node --version
     ;;
   wdio:local)
+    Xvfb ${XVFB_DISPLAY} ${XVFB_ARGS} & \
     npm run wdio:local
     ;;
   *)
