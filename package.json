@@ -4,7 +4,7 @@
   "description": "A simple git repo to understand and run wdio tests inside docker container.",
   "main": "index.js",
   "scripts": {
-    "wdio:local": "npx wdio run ./wdio.conf.js"
+    "wdio:local": "npx wdio run ./wdio.docker.conf.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/jawalejitendra/PlayWithDocker#readme",
   "dependencies": {
-    "@wdio/cli": "^7.2.1"
+    "@wdio/cli": "^7.2.1",
+    "deepmerge": "^4.2.2"
   },
   "devDependencies": {
     "@wdio/local-runner": "^7.2.1",
