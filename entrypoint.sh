@@ -11,6 +11,9 @@ case $1 in
   command2)
     ls
     ;;
+  nodeVersion)
+    node --version
+    ;;
   *)
     exec "$@"
     ;;
