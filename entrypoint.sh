@@ -9,10 +9,14 @@ case $1 in
     echo "this is working fine"
     ;;
   command2)
-    ls
+    which google-chrome-stable
     ;;
   nodeVersion)
     node --version
+    ;;
+  wdio:local)
+    Xvfb ${XVFB_DISPLAY} ${XVFB_ARGS} & \
+    npm run wdio:local
     ;;
   *)
     exec "$@"

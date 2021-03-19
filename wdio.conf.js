@@ -1,3 +1,15 @@
+const chromeDriverVersion = '88.0.4324.96';
+const chrome = {
+  browserName: 'chrome',
+  acceptInsecureCerts: true
+};
+const chromeDocker = {
+  'goog:chromeOptions': {
+    args: ['--disable-dev-shm-usage', '--no-sandbox'],
+  },
+  ...chrome,
+};
+
 exports.config = {
     //
     // ====================
@@ -39,26 +51,26 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [{
-    
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        maxInstances: 5,
-        //
-        browserName: 'chrome',
-        acceptInsecureCerts: true
-        // If outputDir is provided WebdriverIO can capture driver session logs
-        // it is possible to configure which logTypes to include/exclude.
-        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-        // excludeDriverLogs: ['bugreport', 'server'],
-    }],
+//    capabilities: [{
+//
+//        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
+//        // grid with only 5 firefox instances available you can make sure that not more than
+//        // 5 instances get started at a time.
+//        maxInstances: 5,
+//        //
+//        browserName: 'chrome',
+//        acceptInsecureCerts: true
+//        // If outputDir is provided WebdriverIO can capture driver session logs
+//        // it is possible to configure which logTypes to include/exclude.
+//        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
+//        // excludeDriverLogs: ['bugreport', 'server'],
+//    }],
     //
     // ===================
     // Test Configurations
@@ -106,8 +118,21 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver'],
-    
+   services: [
+     ['selenium-standalone',
+     {
+       installArgs: {
+         drivers: {
+           chrome: { version: chromeDriverVersion },
+         },
+       },
+       args: {
+         drivers: {
+           chrome: { version: chromeDriverVersion },
+         },
+       },
+     }],
+   ],
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -152,8 +177,9 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+     onPrepare: function (config, capabilities) {
+
+     },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -181,8 +207,9 @@ exports.config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+     before: function (capabilities, specs) {
+     console.log("capabilities: "+JSON.stringify(browser.config.capabilities));
+     },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

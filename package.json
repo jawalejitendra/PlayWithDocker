@@ -1,10 +1,10 @@
 {
   "name": "playwithdocker",
   "version": "1.0.0",
-  "description": "Build and run simple command ```bash docker build -t image-test --target test . docker run image-test command1 docker run image-test nodeVersion ```",
+  "description": "A simple git repo to understand and run wdio tests inside docker container.",
   "main": "index.js",
   "scripts": {
-    "wdio:local": "npx wdio run ./wdio.conf.js"
+    "wdio:local": "npx wdio run ./wdio.docker.conf.js"
   },
   "repository": {
     "type": "git",
@@ -17,14 +17,15 @@
   },
   "homepage": "https://github.com/jawalejitendra/PlayWithDocker#readme",
   "dependencies": {
-    "@wdio/cli": "^7.2.1"
+    "@wdio/cli": "^7.2.1",
+    "deepmerge": "^4.2.2"
   },
   "devDependencies": {
     "@wdio/local-runner": "^7.2.1",
     "@wdio/mocha-framework": "^7.2.1",
+    "@wdio/selenium-standalone-service": "^6.4.0",
     "@wdio/spec-reporter": "^7.2.1",
     "@wdio/sync": "^7.2.1",
-    "chromedriver": "^89.0.0",
     "wdio-chromedriver-service": "^7.0.0"
   }
 }
